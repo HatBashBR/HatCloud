@@ -29,3 +29,5 @@ Versão: 1.0
 ou<br />
 <strong>ruby hatcloud.rb --byp <seu site></strong><br />
 
+#Screenshot
+<img src="http://i.imgur.com/Wv3skke.png">
