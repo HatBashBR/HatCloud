@@ -1,6 +1,6 @@
 # HatCloud
 
-HatCloud build in Ruby. It makes bypass in CloudFlare for discover real IP.
+HatCloud were builded in Ruby. It makes bypass in CloudFlare for discover real IP.
 This can be useful if you need test your server and website. Testing your protection against Ddos (Denial of Service) or Dos.
 CloudFlare is services and distributed domain name server services, sitting between the visitor and the Cloudflare user's hosting provider, acting as a reverse proxy for websites. 
 Your network protects, speeds up and improves availability of a website or the mobile application with a DNS change. 
