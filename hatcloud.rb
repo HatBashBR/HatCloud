@@ -1,0 +1,65 @@
+require 'net/http'
+require 'open-uri'
+require 'json'
+require 'socket'
+require 'optparse'
+def banner()
+red = "\033[01;31m"
+green = "\033[01;32m"
+default = "\033[0m"
+
+puts "\n"
+puts" ██████╗██╗      ██████╗ ██╗   ██╗██████╗     ██╗  ██╗ █████╗ ████████╗ "
+puts"██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗    ██║  ██║██╔══██╗╚══██╔══╝ "
+puts"██║     ██║     ██║   ██║██║   ██║██║  ██║    ███████║███████║   ██║   "
+puts"██║     ██║     ██║   ██║██║   ██║██║  ██║    ██╔══██║██╔══██║   ██║   "
+puts"╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝    ██║  ██║██║  ██║   ██║   "
+puts" ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   "
+puts "#{red}Tool for identify IP real of CloudFlare." 
+puts "#{green}\x41\x75\x74\x68\x6f\x72\x3a\x20\x4d\x61\x74\x65\x75\x73\x20\x61\x2e\x6b\x2e\x61\x20\x44\x63\x74\x6f\x72\x2e\x20\x2d\x20\x48\x61\x74\x42\x61\x73\x68\x20\x42\x52"
+puts "#{green}\x4d\x65\x6d\x62\x65\x72\x73\x20\x48\x61\x74\x42\x61\x73\x68\x42\x52\x3a\x20\x45\x76\x65\x72\x74\x6f\x6e\x20\x61\x2e\x6b\x2e\x61\x20\x20\x58\x47\x55\x34\x52\x44\x31\x34\x4e\x2c\x20\x4a\x75\x6e\x69\x6f\x72\x20\x61\x2e\x6b\x2e\x61\x20\x41\x53\x54\x41\x52\x4f\x54\x48\x20\x2c\x20\x55\x72\x64\x53\x79\x73\x20\x61\x2e\x6b\x2e\x61\x20\x4a\x6f\x68\x6e\x6e\x79\x2c\x20\x4e\x6f\x20\x6f\x6e\x65\x2c\x20\x47\x65\x6f\x76\x61\x6e\x65\x2c\x20\x52\x48\x6f\x6f\x64"
+puts "fb.com/hatbashbr/"
+puts "github.com/hatbashbr/"  
+
+puts "\n"                                        
+end
+
+options = {:bypass => nil}
+parser = OptionParser.new do|opts|
+   
+    opts.banner = "Exemple: ruby cloudhat.rb -b <your target>  or ruby cloudhat.rb --byp <your target>"
+    opts.on('-b ','--byp ', 'Generetor IP for BootNet', String)do |bypass|
+    options[:bypass]=bypass;
+    end
+    
+    opts.on('-h', '--help', 'Help') do
+        banner()
+        puts opts
+        exit
+    end
+end
+ 
+parser.parse!
+ 
+
+
+banner()
+l = options[:bypass]
+
+
+uri = URI ("http://www.crimeflare.com/cgi-bin/cfsearch.cgi")
+    res = Net::HTTP.post_form(uri, 'cfS' => options[:bypass])
+        x =  res.body 
+y = /(\d*\.\d*\.\d*\.\d*)/.match(x)
+    k = IPSocket.getaddress (options[:bypass])
+    puts "[+] Site analise: #{l} "
+    puts "[+] Ip cloudflare is #{k} "
+    puts "[+] IP real is #{y}"
+        target = "http://ipinfo.io/#{y}/json"
+        url = URI(target).read
+        json = JSON.parse(url)
+    puts "[+] Hostname: " + json['hostname']
+    puts "[+] Cidade: "  +json['city']
+    puts "[+] Region: " + json['country']
+    puts "[+] Location: " + json['loc']
+    puts "[+] Organization: " + json['org']
