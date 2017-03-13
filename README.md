@@ -8,10 +8,10 @@ Your network (?) protects, speeds up and improves availability of a website or t
 Version: 1.0
 
 <em>Use:</em>
-<strong>ruby hatcloud.rb -h or --help</strong>
-<strong>ruby hatcloud.rb -b <your site></strong> 
-or
-<strong>ruby hatcloud.rb --byp <your site></strong>
+<strong>ruby hatcloud.rb -h or --help </strong><br />
+<strong>ruby hatcloud.rb -b your site </strong> <br />
+or<br />
+<strong>ruby hatcloud.rb --byp your site </strong><br />
 
 
 
@@ -25,7 +25,7 @@ disponibilidade de um website ou aplicação móvel com uma mudança no DNS.
 Versão: 1.0
 
 <em>Uso: </em>
-<strong>ruby hatcloud.rb -b <seu site> </strong>
-ou
-<strong>ruby hatcloud.rb --byp <seu site></strong>
+<strong>ruby hatcloud.rb -b seu site </strong><br />
+ou<br />
+<strong>ruby hatcloud.rb --byp <seu site></strong><br />
 
