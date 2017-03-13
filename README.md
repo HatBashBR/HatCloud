@@ -27,7 +27,7 @@ Versão: 1.0
 <em>Uso: </em>
 <strong>ruby hatcloud.rb -b seu site </strong><br />
 ou<br />
-<strong>ruby hatcloud.rb --byp <seu site></strong><br />
+<strong>ruby hatcloud.rb --byp seu site</strong><br />
 
 #Screenshot
 <img src="http://i.imgur.com/Wv3skke.png"> <br />
