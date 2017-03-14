@@ -3,6 +3,9 @@ require 'open-uri'
 require 'json'
 require 'socket'
 require 'optparse'
+require 'timeout'
+
+
 def banner()
 red = "\033[01;31m"
 green = "\033[01;32m"
@@ -28,13 +31,15 @@ options = {:bypass => nil}
 parser = OptionParser.new do|opts|
    
     opts.banner = "Exemple: ruby cloudhat.rb -b <your target>  or ruby cloudhat.rb --byp <your target>"
-    opts.on('-b ','--byp ', 'Generetor IP for BootNet', String)do |bypass|
+    opts.on('-b ','--byp ', 'Discorver real IP (bypass cloudflare)', String)do |bypass|
     options[:bypass]=bypass;
     end
+    
     
     opts.on('-h', '--help', 'Help') do
         banner()
         puts opts
+        puts "Exemple: ruby cloudhat.rb -b discordapp.com or ruby cloudhat.rb --byp discordapp.com"
         exit
     end
 end
@@ -44,22 +49,26 @@ parser.parse!
 
 
 banner()
+  
 l = options[:bypass]
-
-
 uri = URI ("http://www.crimeflare.com/cgi-bin/cfsearch.cgi")
     res = Net::HTTP.post_form(uri, 'cfS' => options[:bypass])
+        
         x =  res.body 
 y = /(\d*\.\d*\.\d*\.\d*)/.match(x)
     k = IPSocket.getaddress (options[:bypass])
-    puts "[+] Site analise: #{l} "
-    puts "[+] Ip cloudflare is #{k} "
+    
+    puts "[+] Site analysis: #{l} "
+    puts "[+] IP CloudFlare is #{k} "
     puts "[+] IP real is #{y}"
         target = "http://ipinfo.io/#{y}/json"
         url = URI(target).read
         json = JSON.parse(url)
     puts "[+] Hostname: " + json['hostname']
-    puts "[+] Cidade: "  +json['city']
+    puts "[+] City: "  +json['city']
     puts "[+] Region: " + json['country']
     puts "[+] Location: " + json['loc']
     puts "[+] Organization: " + json['org']
+
+
+
