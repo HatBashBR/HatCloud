@@ -1,3 +1,5 @@
+#!/usr/local/bin/ruby -w
+# encoding: UTF-8
 require 'net/http'
 require 'open-uri'
 require 'json'
