@@ -5,13 +5,11 @@ require 'open-uri'
 require 'json'
 require 'socket'
 require 'optparse'
-require 'timeout'
-
 
 def banner()
 red = "\033[01;31m"
 green = "\033[01;32m"
-default = "\033[0m"
+
 
 puts "\n"
 puts" ██████╗██╗      ██████╗ ██╗   ██╗██████╗     ██╗  ██╗ █████╗ ████████╗ "
@@ -29,7 +27,7 @@ puts "github.com/hatbashbr/"
 puts "\n"                                        
 end
 
-options = {:bypass => nil}
+options = {:bypass => nil, :massbypass => nil}
 parser = OptionParser.new do|opts|
    
     opts.banner = "Exemple: ruby cloudhat.rb -b <your target>  or ruby cloudhat.rb --byp <your target>"
@@ -37,6 +35,10 @@ parser = OptionParser.new do|opts|
     options[:bypass]=bypass;
     end
     
+    opts.on('-o', '--out', 'Next release.', String) do |massbypass|
+        options[:massbypass]=massbypass
+       
+    end 
     
     opts.on('-h', '--help', 'Help') do
         banner()
@@ -49,9 +51,11 @@ end
 parser.parse!
  
 
-
 banner()
-  
+
+if options[:bypass].nil?
+    puts "Inser URL -b or --byp"
+else
 l = options[:bypass]
 uri = URI ("http://www.crimeflare.com/cgi-bin/cfsearch.cgi")
     res = Net::HTTP.post_form(uri, 'cfS' => options[:bypass])
@@ -67,10 +71,15 @@ y = /(\d*\.\d*\.\d*\.\d*)/.match(x)
         url = URI(target).read
         json = JSON.parse(url)
     puts "[+] Hostname: " + json['hostname']
-    puts "[+] City: "  +json['city']
+    puts "[+] City: "  + json['city']
     puts "[+] Region: " + json['country']
     puts "[+] Location: " + json['loc']
     puts "[+] Organization: " + json['org']
+
+end
+
+
+
 
 
 
