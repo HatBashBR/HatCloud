@@ -18,7 +18,7 @@ puts"██║     ██║     ██║   ██║██║   ██║█�
 puts"██║     ██║     ██║   ██║██║   ██║██║  ██║    ██╔══██║██╔══██║   ██║   "
 puts"╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝    ██║  ██║██║  ██║   ██║   "
 puts" ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   "
-puts "#{red}Tool for identify IP real of CloudFlare." 
+puts "#{red}Tool for identifying real IP of CloudFlare protected website." 
 puts "#{green}\x41\x75\x74\x68\x6f\x72\x3a\x20\x4d\x61\x74\x65\x75\x73\x20\x61\x2e\x6b\x2e\x61\x20\x44\x63\x74\x6f\x72\x2e\x20\x2d\x20\x48\x61\x74\x42\x61\x73\x68\x20\x42\x52"
 puts "#{green}\x4d\x65\x6d\x62\x65\x72\x73\x20\x48\x61\x74\x42\x61\x73\x68\x42\x52\x3a\x20\x45\x76\x65\x72\x74\x6f\x6e\x20\x61\x2e\x6b\x2e\x61\x20\x20\x58\x47\x55\x34\x52\x44\x31\x34\x4e\x2c\x20\x4a\x75\x6e\x69\x6f\x72\x20\x61\x2e\x6b\x2e\x61\x20\x41\x53\x54\x41\x52\x4f\x54\x48\x20\x2c\x20\x55\x72\x64\x53\x79\x73\x20\x61\x2e\x6b\x2e\x61\x20\x4a\x6f\x68\x6e\x6e\x79\x2c\x20\x4e\x6f\x20\x6f\x6e\x65\x2c\x20\x47\x65\x6f\x76\x61\x6e\x65\x2c\x20\x52\x48\x6f\x6f\x64"
 puts "fb.com/hatbashbr/"
@@ -30,8 +30,8 @@ end
 options = {:bypass => nil, :massbypass => nil}
 parser = OptionParser.new do|opts|
    
-    opts.banner = "Exemple: ruby cloudhat.rb -b <your target>  or ruby cloudhat.rb --byp <your target>"
-    opts.on('-b ','--byp ', 'Discorver real IP (bypass cloudflare)', String)do |bypass|
+    opts.banner = "Example: ruby cloudhat.rb -b <your target> or ruby cloudhat.rb --byp <your target>"
+    opts.on('-b ','--byp ', 'Discover real IP (bypass CloudFlare)', String)do |bypass|
     options[:bypass]=bypass;
     end
     
@@ -43,7 +43,7 @@ parser = OptionParser.new do|opts|
     opts.on('-h', '--help', 'Help') do
         banner()
         puts opts
-        puts "Exemple: ruby cloudhat.rb -b discordapp.com or ruby cloudhat.rb --byp discordapp.com"
+        puts "Example: ruby cloudhat.rb -b discordapp.com or ruby cloudhat.rb --byp discordapp.com"
         exit
     end
 end
@@ -54,7 +54,7 @@ parser.parse!
 banner()
 
 if options[:bypass].nil?
-    puts "Inser URL -b or --byp"
+    puts "Insert URL -b or --byp"
 else
 l = options[:bypass]
 uri = URI ("http://www.crimeflare.com/cgi-bin/cfsearch.cgi")
@@ -65,8 +65,8 @@ y = /(\d*\.\d*\.\d*\.\d*)/.match(x)
     k = IPSocket.getaddress (options[:bypass])
     
     puts "[+] Site analysis: #{l} "
-    puts "[+] IP CloudFlare is #{k} "
-    puts "[+] IP real is #{y}"
+    puts "[+] CloudFlare IP is #{k} "
+    puts "[+] Real IP is #{y}"
         target = "http://ipinfo.io/#{y}/json"
         url = URI(target).read
         json = JSON.parse(url)
@@ -77,9 +77,3 @@ y = /(\d*\.\d*\.\d*\.\d*)/.match(x)
     puts "[+] Organization: " + json['org']
 
 end
-
-
-
-
-
-
