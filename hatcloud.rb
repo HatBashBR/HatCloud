@@ -60,7 +60,7 @@ if options[:bypass].nil?
     puts "Insert URL -b or --byp"
 else
 option = options[:bypass]
-payload = URI ("http://www.crimeflare.com/cgi-bin/cfsearch.cgi")
+payload = URI ("http://www.crimeflare.org/cgi-bin/cfsearch.cgi")
     request = Net::HTTP.post_form(payload, 'cfS' => options[:bypass])
         
         response =  request.body 
