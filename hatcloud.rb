@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby -w
+#!/usr/bin/env ruby
 # encoding: UTF-8
 require 'net/http'
 require 'open-uri'
