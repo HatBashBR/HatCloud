@@ -64,7 +64,17 @@ else
 	request = Net::HTTP.post_form(payload, 'cfS' => options[:bypass])
 
 	response =  request.body
+	nscheck = /No working nameservers are registered/.match(response)
+	if( !nscheck.nil? )
+		puts "[-] No valid address - are you sure this is a CloudFlare protected domain?\n"
+		exit
+	end
 	regex = /(\d*\.\d*\.\d*\.\d*)/.match(response)
+	if( regex.nil? || regex == "" )
+		puts "[-] No valid address - are you sure this is a CloudFlare protected domain?\n"
+		puts "[-] Alternately, maybe crimeflare.org is down? Try it by hand.\n"
+		exit
+	end
 	ip_real = IPSocket.getaddress (options[:bypass])
 
 	puts "[+] Site analysis: #{option} "
