@@ -30,5 +30,5 @@ ou<br />
 <strong>ruby hatcloud.rb --byp seu site</strong><br />
 
 #Screenshot
-<img src="http://i.imgur.com/Wv3skke.png"> <br />
+<img src="https://i.imgur.com/iB2e0AU.png"> <br />
 <img src="http://i.imgur.com/V8FS7up.png"> <br />
