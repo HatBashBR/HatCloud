@@ -86,7 +86,7 @@ end
 	target = "http://ipinfo.io/#{regex}/json"
 	url = URI(target).read
 	json = JSON.parse(url)
-	puts "[+] Hostname: ".green + json['hostname']
+	puts "[+] Hostname: ".green + json['hostname'].to_s
 	puts "[+] City: ".green  + json['city']
 	puts "[+] Region: ".green + json['country']
 	puts "[+] Location: ".green + json['loc']
