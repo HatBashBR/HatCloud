@@ -6,10 +6,12 @@ require 'json'
 require 'socket'
 require 'optparse'
 
+class String
+def black;          "\e[30m#{self}\e[0m" end
+def red;            "\e[31m#{self}\e[0m" end
+def green;          "\e[32m#{self}\e[0m" end
+end
 def banner()
-red = "\033[01;31m"
-green = "\033[01;32m"
-
 
 puts "\n"
 puts"██╗  ██╗ █████╗ ████████╗     ██████╗██╗      ██████╗ ██╗   ██╗██████╗ "
@@ -21,7 +23,7 @@ puts"╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝        ╚════
 
 
 
-puts "#{red}Tool for identifying real IP of CloudFlare protected website."
+puts "Tool for identifying real IP of CloudFlare protected website."
 puts "fb.com/hatbashbr/"
 puts "github.com/hatbashbr/"
 
@@ -57,6 +59,7 @@ banner()
 if options[:bypass].nil?
     puts "Insert URL -b or --byp"
 else
+	begin
 	option = options[:bypass]
 	payload = URI ("http://www.crimeflare.us:82/cgi-bin/cfsearch.cgi")
 	request = Net::HTTP.post_form(payload, 'cfS' => options[:bypass])
@@ -70,21 +73,23 @@ else
 	regex = /(\d*\.\d*\.\d*\.\d*)/.match(response)
 	if( regex.nil? || regex == "" )
 		puts "[-] No valid address - are you sure this is a CloudFlare protected domain?\n"
-		puts "[-] Alternately, maybe crimeflare.org is down? Try it by hand.\n"
 		exit
 	end
+rescue
+	puts "Fatail Erro !"
+end
 	ip_real = IPSocket.getaddress (options[:bypass])
 
-	puts "[+] Site analysis: #{option} "
-	puts "[+] CloudFlare IP is #{ip_real} "
-	puts "[+] Real IP is #{regex}"
+	puts "[+] Site analysis: #{option} ".green
+	puts "[+] CloudFlare IP is #{ip_real} ".green
+	puts "[+] Real IP is #{regex}".green
 	target = "http://ipinfo.io/#{regex}/json"
 	url = URI(target).read
 	json = JSON.parse(url)
-	puts "[+] Hostname: " + json['hostname']
-	puts "[+] City: "  + json['city']
-	puts "[+] Region: " + json['country']
-	puts "[+] Location: " + json['loc']
-	puts "[+] Organization: " + json['org']
+	puts "[+] Hostname: ".green + json['hostname']
+	puts "[+] City: ".green  + json['city']
+	puts "[+] Region: ".green + json['country']
+	puts "[+] Location: ".green + json['loc']
+	puts "[+] Organization:".green + json['org']
 
 end
