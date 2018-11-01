@@ -76,7 +76,7 @@ else
 		exit
 	end
 rescue
-	puts "Fatail Erro !"
+	puts "Fatal Error!"
 end
 	ip_real = IPSocket.getaddress (options[:bypass])
 
