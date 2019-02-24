@@ -61,7 +61,7 @@ if options[:bypass].nil?
 else
 	begin
 	option = options[:bypass]
-	payload = URI ("http://www.crimeflare.us:82/cgi-bin/cfsearch.cgi")
+	payload = URI ("http://www.crimeflare.biz:82/cgi-bin/cfsearch.cgi")
 	request = Net::HTTP.post_form(payload, 'cfS' => options[:bypass])
 
 	response =  request.body
