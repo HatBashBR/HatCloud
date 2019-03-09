@@ -1,4 +1,4 @@
-# HatCloud
+# HatCloud - discontinued
 
 HatCloud build in Ruby. It makes bypass in CloudFlare for discover real IP.
 This can be useful if you need test your server and website. Testing your protection against Ddos (Denial of Service) or Dos.
