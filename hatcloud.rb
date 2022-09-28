@@ -83,7 +83,7 @@ end
 	puts "[+] Site analysis: #{option} ".green
 	puts "[+] CloudFlare IP is #{ip_real} ".green
 	puts "[+] Real IP is #{regex}".green
-	target = "http://ipinfo.io/#{regex}/json"
+	target = "http://ipinfo.io/#{regex}json"
 	url = URI(target).read
 	json = JSON.parse(url)
 	puts "[+] Hostname: ".green + json['hostname'].to_s
